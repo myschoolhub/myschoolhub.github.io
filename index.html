@@ -44,50 +44,49 @@
     <ul id="newsList"><li>Loading news...</li></ul>
   </section>
 
- <!-- Games Section -->
-<section id="games">
-  <h2>Unblocked Games</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h3>2048</h3>
-      <iframe src="https://play2048.co/" width="220" height="260"></iframe>
+  <!-- Games Section -->
+  <section id="games">
+    <h2>Unblocked Games</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>2048</h3>
+        <iframe src="https://play2048.co/" width="220" height="260"></iframe>
+      </div>
+      <div class="card">
+        <h3>Slither.io</h3>
+        <iframe src="https://slither.io/" width="220" height="260"></iframe>
+      </div>
+      <div class="card">
+        <h3>Pacman</h3>
+        <iframe src="https://www.retrogames.cc/embed/17964-pac-man.html" width="220" height="260"></iframe>
+      </div>
+      <div class="card">
+        <h3>Flappy Bird</h3>
+        <iframe src="https://flappybird.io/" width="220" height="260"></iframe>
+      </div>
     </div>
-    <div class="card">
-      <h3>Slither.io</h3>
-      <iframe src="https://slither.io/" width="220" height="260"></iframe>
-    </div>
-    <div class="card">
-      <h3>Pacman</h3>
-      <iframe src="https://www.retrogames.cc/embed/17964-pac-man.html" width="220" height="260"></iframe>
-    </div>
-    <div class="card">
-      <h3>Flappy Bird</h3>
-      <iframe src="https://flappybird.io/" width="220" height="260"></iframe>
-    </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Essentials Section -->
   <section id="essentials">
     <h2>Essentials</h2>
     <div class="card-grid">
-      <div class="card"><h3>Math Notes</h3><a href="#">Download PDF</a></div>
-      <div class="card"><h3>English Worksheets</h3><a href="#">Download PDF</a></div>
-      <div class="card"><h3>Science Resources</h3><a href="#">Download PDF</a></div>
+      <div class="card"><h3>Math Notes</h3><a href="https://www.mathsisfun.com/worksheets/index.html" target="_blank">Download PDF</a></div>
+      <div class="card"><h3>English Worksheets</h3><a href="https://www.englishforeveryone.org/Worksheets.htm" target="_blank">Download PDF</a></div>
+      <div class="card"><h3>Science Resources</h3><a href="https://www.khanacademy.org/science" target="_blank">View Resources</a></div>
     </div>
   </section>
 
   <!-- Math Section -->
   <section id="math">
     <h2>Math</h2>
-    <p>Formulas, examples, and interactive graphs can go here.</p>
+    <p>Formulas, examples, interactive graphs, and links to online calculators can go here. Example: <a href="https://www.desmos.com/calculator" target="_blank">Desmos Graphing Calculator</a></p>
   </section>
 
   <!-- English Section -->
   <section id="english">
     <h2>English</h2>
-    <p>Writing prompts, grammar tips, and reading materials.</p>
+    <p>Writing prompts, grammar tips, and reading materials. Example: <a href="https://www.timeforkids.com/g56/" target="_blank">Time for Kids</a></p>
   </section>
 
   <!-- AI Section -->
@@ -109,7 +108,7 @@
 // Load news from thenewsapi.com
 async function loadNews() {
   const newsContainer = document.getElementById('newsList');
-  const apiKey = 'YbFO58IBozTQd1HgBDlWQlvWk5Q7Gt0OL4mWDnBg'; // Replace with your API key
+  const apiKey = 'YOUR_API_KEY'; // Replace with your API key from thenewsapi.com
   const url = `https://api.thenewsapi.com/v1/news/top?apikey=${apiKey}&country=us&language=en`;
 
   try {
