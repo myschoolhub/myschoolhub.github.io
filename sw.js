@@ -2,7 +2,7 @@ const CACHE_NAME = 'offline-ai-cache-v1';
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
-  'https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@latest/dist/webllm.min.js',
+  'https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.79/dist/webllm.min.js',
   'https://huggingface.co/mlc-ai/Llama-3-8B-Instruct-q4f32_1-MLC/resolve/main/model.bin'
 ];
 
