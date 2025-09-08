@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My School Hub</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+    header { background:#2c3e50; color:white; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; }
+    header h1 { margin:0; font-size:1.8rem; }
+    nav a { color:white; text-decoration:none; margin-left:15px; font-weight:bold; }
+    nav a:hover { text-decoration:underline; }
+    main { padding:20px; }
+    section { background:white; padding:15px; margin-bottom:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    h2 { margin-top:0; }
+    ul { padding-left:20px; }
+    iframe { border:none; border-radius:8px; }
+    .games-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; }
+    .game-item { background:#ecf0f1; padding:10px; border-radius:6px; text-align:center; }
+    #chatOutput { border:1px solid #ccc; padding:10px; height:200px; overflow-y:auto; margin-top:10px; background:white; border-radius:6px; }
+    #chatInput { width:100%; padding:8px; margin-top:10px; }
+    button { padding:8px 15px; margin-top:5px; cursor:pointer; background:#2980b9; color:white; border:none; border-radius:5px; }
+    button:hover { background:#3498db; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My School Hub</h1>
+    <nav>
+      <a href="#news">News</a>
+      <a href="#games">Games</a>
+      <a href="#essentials">Essentials</a>
+      <a href="#math">Math</a>
+      <a href="#english">English</a>
+      <a href="#ai">AI Chat</a>
+    </nav>
+  </header>
+  <main>
+    <!-- News Section -->
+    <section id="news">
+      <h2>News</h2>
+      <ul>
+        <li><strong>Sept 8:</strong> School carnival coming up!</li>
+        <li><strong>Sept 7:</strong> New math club meeting scheduled.</li>
+      </ul>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games">
+      <h2>Unblocked Games</h2>
+      <div class="games-grid">
+        <div class="game-item">
+          <p>Game 1</p>
+          <iframe src="https://example.com/game1" width="200" height="150"></iframe>
+        </div>
+        <div class="game-item">
+          <p>Game 2</p>
+          <iframe src="https://example.com/game2" width="200" height="150"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Essentials Section -->
+    <section id="essentials">
+      <h2>Essentials</h2>
+      <ul>
+        <li><a href="#">Math Notes PDF</a></li>
+        <li><a href="#">English Worksheets</a></li>
+        <li><a href="#">Science Resources</a></li>
+      </ul>
+    </section>
+
+    <!-- Math Section -->
+    <section id="math">
+      <h2>Math</h2>
+      <p>Formulas, examples, and notes go here. You can embed Desmos graphs too.</p>
+    </section>
+
+    <!-- English Section -->
+    <section id="english">
+      <h2>English</h2>
+      <p>Writing prompts, grammar tips, worksheets, and reading materials.</p>
+    </section>
+
+    <!-- AI Chat + Image Generation Section -->
+    <section id="ai">
+      <h2>AI Chat & Image Generation</h2>
+      <textarea id="chatInput" placeholder="Type your message here..."></textarea>
+      <button onclick="sendMessage()">Send</button>
+      <div id="chatOutput"></div>
+    </section>
+  </main>
+
+  <script>
+    // Simple AI chat placeholder (replace with real API)
+    function sendMessage() {
+      const input = document.getElementById('chatInput').value;
+      if(!input) return;
+      const output = document.getElementById('chatOutput');
+      const userMsg = document.createElement('div');
+      userMsg.textContent = 'You: ' + input;
+      userMsg.style.fontWeight = 'bold';
+      output.appendChild(userMsg);
+
+      // Simulate AI response
+      const aiMsg = document.createElement('div');
+      aiMsg.textContent = 'AI: ' + 'This is a placeholder response. Replace with API call.';
+      output.appendChild(aiMsg);
+
+      output.scrollTop = output.scrollHeight;
+      document.getElementById('chatInput').value = '';
+    }
+  </script>
+</body>
+</html>
