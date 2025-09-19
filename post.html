@@ -1,1 +1,96 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Write a Post</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>body{font-family:system-ui;padding:20px;max-width:800px} textarea{width:100%;height:200px}</style>
+</head>
+<body>
+  <h1>New Post</h1>
+  <form id="postForm">
+    <input id="title" placeholder="Title" required style="width:100%"><br><br>
+    <textarea id="content" placeholder="Write the article..." required></textarea><br>
+    <button type="submit">Post to GitHub (unsafe, for testing)</button>
+  </form>
+  <p id="status"></p>
+
+  <script>
+    // ==== CONFIG - fill these in ====
+    const OWNER = "myschoolhub";
+    const REPO = "news";
+    const BRANCH = "main";
+    const FILE_PATH = "posts.json";
+    const TOKEN = "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"; // ⚠️ unsafe to expose publicly
+    // ================================
+
+    // Helpers to handle UTF-8 when base64 encoding.
+    const encodeBase64 = str => btoa(unescape(encodeURIComponent(str)));
+    const decodeBase64 = str => decodeURIComponent(escape(atob(str)));
+
+    async function getFile() {
+      // Get file metadata + content from GitHub (to retrieve sha).
+      const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`;
+      const res = await fetch(url, { headers: { Authorization: `token ${TOKEN}` }});
+      if (res.status === 404) return null; // file doesn't exist yet
+      if (!res.ok) throw new Error('Failed to fetch file: ' + res.status);
+      return await res.json(); // has .sha and .content (base64)
+    }
+
+    async function updateFile(newPosts, sha) {
+      const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`;
+      const body = {
+        message: `Add post: ${newPosts[newPosts.length-1].title}`,
+        content: encodeBase64(JSON.stringify(newPosts, null, 2)),
+        branch: BRANCH
+      };
+      if (sha) body.sha = sha; // include when updating existing file
+      const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error('Failed to update file: ' + res.status + ' - ' + txt);
+      }
+      return await res.json();
+    }
+
+    document.getElementById("postForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const status = document.getElementById("status");
+      status.textContent = "Posting...";
+      try {
+        const title = document.getElementById("title").value.trim();
+        const content = document.getElementById("content").value.trim();
+        if (!title || !content) { status.textContent = "Fill both fields."; return; }
+        const date = new Date().toISOString();
+
+        // 1. get current file (if any)
+        const fileData = await getFile(); // null if not exist
+        let posts = [];
+        let sha = null;
+        if (fileData && fileData.content) {
+          posts = JSON.parse(decodeBase64(fileData.content));
+          sha = fileData.sha;
+        }
+
+        // 2. append
+        posts.push({ title, content, date });
+
+        // 3. update/commit
+        await updateFile(posts, sha);
+        status.innerHTML = "✅ Posted — refresh index page to see it.";
+      } catch (err) {
+        console.error(err);
+        status.textContent = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
