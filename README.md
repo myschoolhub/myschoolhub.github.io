@@ -1,1 +1,1 @@
-# news
+# Welcome to MySchoolHub!
