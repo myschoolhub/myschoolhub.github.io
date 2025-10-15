@@ -6,7 +6,7 @@ title: Anime
 <h2>World News Articles</h2>
 <ul>
   {% for post in site.posts %}
-    {% if post.categories contains "world news" %}
+    {% if post.categories contains "world_news" %}
       <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> - {{ post.date | date: "%B %d, %Y" }}</li>
     {% endif %}
   {% endfor %}
